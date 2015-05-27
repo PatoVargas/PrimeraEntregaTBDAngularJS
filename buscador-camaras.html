@@ -1,0 +1,61 @@
+<div class="container-fluid">	
+	<div class="row">
+		<h3><font color="blue"><strong>Cámaras Populares</strong></font></h3>
+		<div class="col-xs-2 col-xs-offset-1">
+			<img src="img/celular1.jpg" class="img-thumbnail">
+			<h5><font color="blue"><strong><a href="#">Samsung Galaxy Note 3</a></strong></font></h5>
+		</div>
+		<div class="col-xs-2">
+			<img src="img/celular2.jpg" class="img-thumbnail">
+			<h5><font color="blue"><strong><a href="#">Iphone 5</a></strong></font></h5>
+		</div>
+		<div class="col-xs-2">
+			<img src="img/camara1.jpg" class="img-thumbnail">
+			<h5><font color="blue"><strong><a href="#">Nikon 7100</a></strong></font></h5>
+		</div>
+		<div class="col-xs-2">
+			<img src="img/camara2.jpg" class="img-thumbnail">
+			<h5><font color="blue"><strong><a href="#">Canon 60D</a></strong></font></h5>
+		</div>
+		<div class="col-xs-2">
+			<img src="img/celular3.jpg" class="img-thumbnail">
+			<h5><font color="blue"><strong><a href="#">Sony Xperia Z3</a></strong></font></h5>
+		</div>
+	</div>
+	
+	<div class="row" ng-controller="camarasCtrl as controlador">
+		<h3><font color="blue"><strong>Ranking</strong></font></h3>
+		<table class="table table-bordered">
+			<thead>
+				<tr>
+					<th><font color="blue"><a href="#">Ranking</a><font></th>
+					<th><font color="blue"><a href="#">Marca</a><font></th>
+					<th><font color="blue"><a href="#">Modelo</a><font></th>
+					<th><font color="blue"><a href="#">Tipos de modelos</a><font></th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat="camaras in controlador.camaras">
+					<td>{{ camaras.ranking }}</td>
+					<td><a href="#">{{ camaras.marca }}</a></td>
+					<td><a href="#">{{ camaras.modelo }}</a></td>
+					<td>{{ camaras.tipo }}</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	<div class="row">
+		<h3><font color="blue"><strong>Gráfico comparativo</strong></font></h3>
+		<div class="col-xs-4 col-xs-offset-2">
+			<img src="img/grafico.jpg" alt=":)" class="img-thumbnail">
+			<h1><font color="white"><strong>Gráfico comparativo</strong></font></h1>
+		</div>
+		<div class="col-xs-2">
+			<li><font color="#ff00ff">Apple iPhone 5s</font></li>
+			<li><font color="yellow">Apple iPhone 5</font></li>
+			<li><font color="#00ff00">Samsung Galaxy S4</font></li>
+			<li><font color="#00ffff">Galaxy S5</font></li>
+			<li><font color="#808080">Apple iPhone 6</font></li>
+		</div>
+	</div>
+</div>

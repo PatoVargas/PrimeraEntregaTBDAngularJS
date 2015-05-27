@@ -1,0 +1,58 @@
+<div class= "row" ng-controller="MainCtrl">
+	<div class="col-xs-3"></div>
+		<div class="col-xs-3">
+			<form class="form-horizontal" role="form">
+			<div class="form-group">
+				<h5><font color="blue">Ingrese correo:</font></h5>
+				<label class="sr-only" for="ejemplo_email_2">Email</label>
+				<input type="email" class="form-control" id="ejemplo_email_2" placeholder="Email" required ng-model="usuario.email">
+			</div>
+			<div class="form-group">
+				<h5><font color="blue">Ingrese clave de acceso:</font></h5>
+				<label class="sr-only" for="ejemplo_password_2">Contraseña</label>
+				<input type="password" class="form-control" id="ejemplo_password_1" placeholder="Contraseña" required ng-model="usuario.pass">
+			</div>
+			<div class="form-group">
+				<h5><font color="blue">Repita clave de acceso:</font></h5>
+				<label class="sr-only" for="ejemplo_password_2">Contraseña</label>
+				<input type="password" class="form-control" id="ejemplo_password_2" placeholder="Contraseña" required ng-model="usuario.pass2">
+			</div>
+			<div class="form-group">
+				<h5><font color="blue">Nombre de usuario:</font></h5>
+					<label class="sr-only" for="ejemplo_password_2"></label>
+					<input type="text" class="form-control" id="ejemplo_usuario_1" placeholder="Nombre" required ng-model="usuario.email" required ng-model="usuario.nombre">
+			</div>						
+			<button type="button" class="btn btn-default"><a href="vistausuario.html" ng-click="registrar(usuario)">Registrar</a></button>
+			</form>	
+		</div>
+	<div class="col-xs-3 col-xs-offset-1">
+		<form class="form-horizontal" role="form">
+			<div class="form-group">
+				<h5><font color="blue">Fecha de nacimiento:</font></h5>
+				<div class="row">
+					<div class="col-xs-3">
+						<input type="text" class="form-control" id="ejemplo_día_1" placeholder="Día" required ng-model="usuario.dia">
+					</div>
+					<div class="col-xs-3">
+						<input type="text" class="form-control" id="ejemplo_mes_1" placeholder="Mes" required ng-model="usuario.mes">
+					</div>
+					<div class="col-xs-3">
+					<input type="text" class="form-control" id="ejemplo_año_2" placeholder="Año" required ng-model="usuario.year">
+					</div>
+				</div>
+			</div>
+			<div class="form-group">
+				<h5><font color="blue">Telefono:</font></h5>
+				<label class="sr-only" for="ejemplo_password_2">Telefono</label>
+				<input type="text" class="form-control" id="fono" placeholder="555-5555" required ng-model="usuario.fono">
+			</div>
+			<div>
+				<h5><font color="blue">Sexo:</font></h5>
+				<select class="form-group" required ng-model="usuario.sexo">
+					<option value = "F">Femenino</option>
+					<option value = "M">Masculino</option>
+				</select>
+			</div>
+		</form>	
+	</div>
+</div>

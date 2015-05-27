@@ -1,0 +1,32 @@
+        <div class="modal-header">
+            <h1>Título:</h1>
+            <h3>Autor:</h3>
+        </div>
+        <div class="modal-body">
+            <div class="row">
+                <div class="col-xs-6" align="center">
+                <img src="img/foto12.jpg" class="img-thumbnail">
+                </div>
+                <div class="col-xs-3" align="center" ng-controller="ComentariosCtrl as controlador">
+                    <div class="alert alert-warning" role="alert" ng-repeat="comentarios in controlador.comentarios">
+                    <p>"{{ comentarios.body }}"</p>
+                    <p align="right"><strong>{{ comentarios.postId }}</strong></p>
+                    </div>
+                    <p>Nuevo:{{modalUser.shortKey}}</p>
+                </div>
+            </div>
+            <p></p>
+        </div>
+        <div class="modal-footer">
+            <div class="row">
+                <div class="col-xs-6" align="center">
+                    <div class="input-group">
+                        <input type="text" class="form-control input-lg" ng-model="modalUser.shortKey">
+                    </div>
+                </div>
+                <div class="col-xs-3" align="center">
+                    <button class="btn btn-primary" ng-click="ok()">Comentar</button>
+                    <button class="btn btn-warning" ng-click="cancel()">Cancelar</button>
+                </div>
+        </div>
+        </div>

@@ -1,0 +1,73 @@
+<script type="text/javascript">
+	$(function() {
+		$("#descripcion").click(function(event) {
+		$("#capa").load("descripcion.html");
+		});
+		$("#porque").click(function(event) {
+		$("#capa").load("porque.html");
+		});
+		$("#comparacion").click(function(event) {
+		$("#capa").load("comparacion.html");
+		});
+		$("#arquitectura").click(function(event) {
+		$("#capa").load("arquitectura.html");
+		});
+		$("#ventaja").click(function(event) {
+		$("#capa").load("ventaja.html");
+		});
+		$("#demo").click(function(event) {
+		$("#capa").load("demo.html");
+		});
+		$("#integrantes").click(function(event) {
+		$("#capa").load("inicio.html");
+		});
+		$("#tabla-contenido").click(function(event) {
+		$("#capa").load("tabla.html");
+		});
+		$("#introduccion").click(function(event) {
+		$("#capa").load("introduccion.html");
+		});
+		$("#desventajas").click(function(event) {
+		$("#capa").load("desventajas.html");
+		});
+		$("#material").click(function(event) {
+		$("#capa").load("material.html");
+		});
+		$("#referencias").click(function(event) {
+		$("#capa").load("referencias.html");
+		});
+	});
+</script>
+
+<div class="row">
+	<ul class="nav nav-tabs nav-justified">
+		<li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Presentación<span class="caret"></span></a>
+			<ul class="dropdown-menu" role="menu">
+				<li><a id = "integrantes" href="#">Integrantes</a></li>
+				<li><a id = "introduccion"href="#">Introducción</a></li>
+				<li><a id = "tabla-contenido" href="#">Contenidos</a></li>
+			</ul>
+		</li>
+		<li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Descripción<span class="caret"></span></a>
+			<ul class="dropdown-menu" role="menu">
+				<li><a id = "descripcion" href="#">¿Qué es?</a></li>
+				<li><a id = "porque" href="#">¿Por qué usarlo?</a></li>
+				<li><a id = "arquitectura" href="#">Arquitectura</a></li>
+			</ul>
+		</li>
+		<li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Comparaciones<span class="caret"></span></a>
+			<ul class="dropdown-menu" role="menu">
+				<li><a id = "ventaja" href="#">Ventajas</a></li>
+				<li><a id = "desventajas" href="#">Desventajas</a></li>
+				<li><a id = "comparacion" href="#">Comparación con otros frameworks</a></li>
+			</ul>
+		</li>
+		<li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Recursos<span class="caret"></span></a>
+			<ul class="dropdown-menu" role="menu">
+				<li><a id = "material" href="#">Material de apoyo</a></li>
+				<li><a id = "demo" href="#">DEMO</a></li>
+				<li><a id = "referencias" href="#">Referencias</a></li>
+			</ul>
+		</li>
+	</ul>
+</div>

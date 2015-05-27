@@ -1,0 +1,18 @@
+<div class="container-fluid" ng-controller='ModalDemoCtrl'>	
+	<div class="row" ng-controller="FotosCtrl as controlador">
+		<div class="col-sm-6 col-md-4">
+			<div class="thumbnail" ng-repeat="fotos in controlador.fotos">
+				<img src="{{fotos.url}}" class="img-thumbnail" ng-click="open('lg')">
+				<div class="caption">
+				<p>
+					<font color="blue"><strong>Untitled</strong></font>
+					<span class="glyphicon glyphicon-heart"><font color="blue">42</font></span>
+					<span class="glyphicon glyphicon-comment"><font color="blue">32</font></span>
+					<font color="blue">Por anibal</font>
+				</p>
+				</div>
+			</div>
+		</div>
+	</div>
+
+</div>

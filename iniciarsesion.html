@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="es" ng-app="ui.bootstrap.demo">
+	<head>
+		<meta charset="UTF-8">
+		<title> Inicio sesión</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" href="css/bootstrap.css">
+		<link href="css/base.css" rel="stylesheet">
+		<link href="css/font-awesome.min.css" rel="stylesheet">
+	</head>
+	<body>
+		<div ng-controller="loginCtrl">
+			<ng-include src="'components/header-registro.html'"></ng-include>
+			<div class="container" style="padding-top: 10em;">
+				<div class="row">
+					<div class="col-xs-5">
+						<form role="form" name="inicioSesion">
+							<div class="form-group">
+								<label for="ejemplo_email_1"><strong><font color="blue">Email o nombre de usuario</font></strong></label>
+								<input type="text" class="form-control"  placeholder="Nombre o correo" required ng-model="user.nombre">
+							</div>
+							<div class="form-group">
+								<label for="ejemplo_password_1"><strong><font color="blue">Clave de acceso</font></strong></label>
+								<input type="password" class="form-control" id="ejemplo_password_1" placeholder="Contraseña" required ng-model="user.pass">
+							</div>
+					</form>
+						<button type="submit" class="btn btn-default" ng-disabled="inicioSesion.$invalid" ng-click="login(user)"><a>Entrar</a></button>
+						{{msgtxt}}
+					</div>
+					<div class="col-xs-3"></div>
+					<div class="col-xs-4">
+						<h3><font color="blue">¿Eres nuevo?</font></h3>
+						<button type="button" class="btn btn-default btn-lg "><a href="registro.html"><font color="blue">Registro</font></a></button>
+					</div>
+				</div>
+			</div>
+			<ng-include src="'components/footer2.html'"></ng-include>
+		</div>
+		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.js"></script>
+        <script src="js/angular-route.min.js"></script>
+        <script src="js/bootstrap.min.js"></script>
+        <script src="js/ui-bootstrap-tpls-0.13.0.min.js"></script>
+		<script src="js/demo-app.js"></script>
+		<script src="js/jquery.min.js"></script>
+		<script src="js/bootstrap.js"></script>
+	</body>	
+</html>
