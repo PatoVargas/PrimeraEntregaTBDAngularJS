@@ -1,24 +1,58 @@
-<!doctype html>
-<html lang="es" ng-app="ui.bootstrap.demo">
-	<head>
-		<meta charset="UTF-8">
-		<title> Subir imagen</title>
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<link rel="stylesheet" href="css/bootstrap.css">
-		<link href="css/base.css" rel="stylesheet">
-		<link href="css/font-awesome.min.css" rel="stylesheet">
-	</head>
-	<body ng-controller="MainCtrl">
-		<ng-include src="'components/header-subir-foto.html'"></ng-include>
-		<ng-include src="'components/formulario-subir-imagen.html'"></ng-include>
-		<ng-include src="'components/footer2.html'"></ng-include>
-		
-		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.js"></script>
-        <script src="js/angular-route.min.js"></script>
-        <script src="js/bootstrap.min.js"></script>
-		<script src="js/demo-app.js"></script>
-		<script src="js/ui-bootstrap-tpls-0.13.0.min.js"></script>
-		<script src="js/jquery.min.js"></script>
-		<script src="js/bootstrap.js"></script>
-	</body>	
-</html>
+<div class="container-fluid">	
+	<div class="row">
+		<div class="col-xs-6">
+			<div class="form-group">
+				<label for="ejemplo_archivo_1"><font color="blue">Elija su Foto</font></label>
+				<input type="file" id="ejemplo_archivo_1">
+			</div>
+			<div class="form-group">
+				<label for="titulo"><font color="blue">Título</font></label>
+				<input type="text" class="form-control" id="titulo" placeholder="Título de la foto">
+			</div>
+			<div class="form-group">
+				<label for="desc"><font color="blue">Descripción</font></label>
+				<input type="text" class="form-control" id="desc" placeholder="Describa su foto">
+			</div>
+			<div class="form-group">
+				<label for="tag"><font color="blue">Descripción</font></label>
+				<input type="text" class="form-control" id="tag" placeholder="Tags o etiquetas">
+			</div>
+			<div class="form-group">
+				<label for="pers"><font color="blue">Personas</font></label>
+				<input type="text" class="form-control" id="pers" placeholder="Gente en la foto">
+			</div>
+			<div class="form-group">
+				<label for="album"><font color="blue">Álbum</font></label>
+				<select class="form-group">
+					<option>Album 1</option>
+					<option>Paseo</option>
+					<option>Crear álbum nuevo</option>
+				</select>
+			</div>
+			<div class="form-group">
+				<label for="album"><font color="blue">Privacidad</font></label>
+				<select class="form-group">
+					<option>Público</option>
+					<option>Familiares y amigos</option>
+					<option>Seguidores</option>
+					<option>Seguidores, familiares y amigos</option>
+					<option>Solo yo</option>
+				</select>
+			</div>
+		</div>
+		<div class="col-xs-2">
+			<h4><font color="blue">Agregar otra foto</font></h4>
+			<button type="button" class="btn btn-default"><a href="vistausuario.html">
+				<span class="glyphicon glyphicon-plus"></span></a>
+			</button>
+			<h4><font color="blue">Subir</font></h4>
+			<button type="button" class="btn btn-default"><a href="vistausuario.html">
+				<span class="glyphicon glyphicon-floppy-open"></span></a>
+			</button>
+			<h4><font color="blue">Cancelar</font></h4>
+			<button type="button" class="btn btn-default"><a href="vistausuario.html">
+				<span class="glyphicon glyphicon-remove"></span></a>
+			</button>
+		</div>
+	</div>
+</div>

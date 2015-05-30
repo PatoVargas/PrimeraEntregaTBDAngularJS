@@ -23,24 +23,14 @@
                 otherwise({redirectTo: '/cameraroll'});
 	}]);
 
-	// Controlador principal de la aplicación, obtiene datos de la factoría 'Page'
     app.controller('MainCtrl', function($scope, Page) {
         $scope.page = Page; 
     });
 
-    // Controlador del cuadro de vistas (ng-view) de la aplicación, setea un título obtenido desde 'Page'
     app.controller('HomeCtrl', function($scope, Page) {
         Page.setTitle("Bienvenido");
     });
 
-    // Controlador de la vista Demo, entrega la variable 'this.mensaje' a la vista HTML
-    app.controller('DemoCtrl', function($scope, Page) {
-        Page.setTitle("AngularJS Demo");
-        this.mensaje = "Haz click en uno de los Demos para cargarlo:";
-    });
-
-    // Variable global 'lugares', ofrece un objeto JS con datos para ser parseados
-    // (puede ser reemplazado por un JSON)
     var lugares = [
         {
             lugar : 'Aquí',
@@ -100,10 +90,7 @@
         }
     ];
 
-
-    // Controlador de la vista Demo Mapa
     app.controller('MapaCtrl', function($scope, $http) {
-        // Configuramos las opciones básicas del mapa
 
         var mapOptions = {
             zoom: 3,
@@ -111,18 +98,13 @@
             mapTypeId: google.maps.MapTypeId.HYBRID
         }
 
-        // Creamos una instancia de Google Maps y la empotramos en el <div> con id 'mapa'
         $scope.map = new google.maps.Map(document.getElementById('mapa'), mapOptions);
 
-        // Variable local para almacenar los marcadores del mapa
         $scope.marcadores = [];
         
-        // Creamos una instancia de ventanas informativas de Google Maps
         var infoWindow = new google.maps.InfoWindow();
-
-        // Función para crear marcadores        
+       
         var crearMarcadores = function (info){
-            // Creamos un marcador con los datos del objeto JS 'info' y lo guardamos en 'marcador'
             var marcador = new google.maps.Marker({
                 map: $scope.map,
                 position: new google.maps.LatLng(info.lat, info.long),
@@ -130,22 +112,18 @@
             });
             marcador.content = '<div class="infoWindowContent">' + info.desc + '</div>';
             marcador.content2 = '<div class="infoWindowContent">' + '<img src="'+info.url+'" Width=200 Height=200/>' + '</div>';
-            // Añadimos un evento al marcador para que muestre la información al hacer click
             google.maps.event.addListener(marcador, 'click', function(){
                 infoWindow.setContent('<h2>' + marcador.title + '</h2>' + marcador.content + marcador.content2);
                 infoWindow.open($scope.map, marcador);
             });
             
-            // Introducimos el marcador en la pila de marcadores
             $scope.marcadores.push(marcador);
         }  
         
-        // Creamos los marcadores con la función recién creada y tomando los datos desde la variable global 'lugares'
         for (i = 0; i < lugares.length; i++){
             crearMarcadores(lugares[i]);
         }
 
-        // Función trigger que permite reaccionar al hacer click en el marcador
         $scope.openInfoWindow = function(e, selectedMarker){
             e.preventDefault();
             google.maps.event.trigger(selectedMarker, 'click');
@@ -193,6 +171,7 @@ app.controller('ModalInstanceCtrl', function ($scope, $modalInstance, items) {
   };
 
   $scope.ok = function () {
+
     $modalInstance.close($scope.selected.item);
   };
 
@@ -227,7 +206,26 @@ app.controller('ModalInstanceCtrl', function ($scope, $modalInstance, items) {
             }
         }
 
+    });
+
+        app.controller('comentarCtrl', function($scope, comentarService){    
+        $scope.comentar=function(comentario){
+            comentarService.comentar(comentario,$scope);
+        }
     });    
+
+    app.factory('comentarService',function($http){
+        return{
+            comentar:function(comentario,scope){
+                $http.post('http://localhost:3000/comments',comentario).success(function(data, status, headers, config) {
+                    alert("Comentario guardado");
+                    }).error(function(data, status, headers, config) {
+                    alert("Ha fallado la petición");
+                });
+            }
+        }
+
+    });     
 
     app.factory('loginService',function($http, sessionService){
         return{
@@ -241,7 +239,7 @@ app.controller('ModalInstanceCtrl', function ($scope, $modalInstance, items) {
                         window.location.href="vistausuario.html"; 
                     }   
                     else{
-                        window.location.href="iniciarsesion.html"; 
+                        alert("Ha fallado el inicio de sesión"); 
                     } 
 
                 });
@@ -294,7 +292,7 @@ app.controller('ModalInstanceCtrl', function ($scope, $modalInstance, items) {
         $http.get('http://localhost:3000/comments').success(function(data){
             store.comentarios = data;
      });
-   
+        
 
     }]);
 

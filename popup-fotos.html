@@ -12,7 +12,7 @@
                     <p>"{{ comentarios.body }}"</p>
                     <p align="right"><strong>{{ comentarios.postId }}</strong></p>
                     </div>
-                    <p>Nuevo:{{modalUser.shortKey}}</p>
+                    <p>Nuevo:{{comentario.body}}</p>
                 </div>
             </div>
             <p></p>
@@ -21,11 +21,11 @@
             <div class="row">
                 <div class="col-xs-6" align="center">
                     <div class="input-group">
-                        <input type="text" class="form-control input-lg" ng-model="modalUser.shortKey">
+                        <input type="text" class="form-control input-lg" required ng-model="comentario.body">
                     </div>
                 </div>
-                <div class="col-xs-3" align="center">
-                    <button class="btn btn-primary" ng-click="ok()">Comentar</button>
+                <div class="col-xs-3" align="center" ng-controller="comentarCtrl">
+                    <button class="btn btn-primary" ng-click="comentar(comentario)">Comentar</button>
                     <button class="btn btn-warning" ng-click="cancel()">Cancelar</button>
                 </div>
         </div>

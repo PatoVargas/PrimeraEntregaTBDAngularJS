@@ -2,7 +2,7 @@
 	<div class="row" ng-controller="FotosCtrl as controlador">
 		<div class="col-sm-6 col-md-4">
 			<div class="thumbnail" ng-repeat="fotos in controlador.fotos">
-				<img src="{{fotos.url}}" class="img-thumbnail" ng-click="open('lg')">
+				<img src="{{fotos.url}}" class="img-thumbnail" ng-click="open('lg')" ng-model="fotoReciente" >
 				<div class="caption">
 				<p>
 					<font color="blue"><strong>Untitled</strong></font>
