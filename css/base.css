@@ -2,7 +2,6 @@ body {
     padding-top: 80px;
 	padding-bottom: 50px;
 }
-
 .ng-modal-overlay {
   /* A dark translucent div that covers the whole screen */
   position:absolute;
@@ -90,5 +89,21 @@ body {
     -moz-animation: bounceOut .8s;
     -ms-animation: bounceOut .8s;
     animation: bounceOut .8s;
+}
+#mapa {
+    height:400px;
+    width:800px;
+}
+.infoWindowContent {
+    font-size:  14px !important;
+    border-top: 1px solid #ccc;
+    padding-top: 10px;
+}
+.diver {
+  padding: 5px 10px 5px 10px;
+}
+h2 {
+    margin-bottom:0;
+    margin-top: 0;
 }
 

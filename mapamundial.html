@@ -2,7 +2,7 @@
 <html ng-app="ui.bootstrap.demo">
     <head>
         <meta charset="utf-8">
-        <title>Presentación AngularJS TBD</title>
+        <title>Mapa Mundial</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link href="css/bootstrap.css" rel="stylesheet">
 		<link href="css/base.css" rel="stylesheet">
@@ -12,8 +12,29 @@
     <body>
 		<div ng-controller="MainCtrl">
             <div id="logo" class="header"></div>
-            <div id="contenido"></div>
-            <ng-view></ng-view>
+                <div ng-controller="MapaCtrl">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-xs-9">
+                                <div id="mapa" class="cnter-blocke"></div>
+                            </div>
+                            <div class="col-xs-3">
+                                <div class="row">
+                                    <br>
+                                    <br>
+                                    <div class="col-xs-10">
+                                        <input type="busqueda" class="form-control" id="ejemplo_busqueda" placeholder="Ingresa tú búsqueda">
+                                    </div>
+                                    <div class="col-xs-2">
+                                        <button type="search" class="btn btn-primary activate"><span class="glyphicon glyphicon-search"></span></button>
+                                    </div>
+                                </div>
+                            </div>
+                            <br>
+                        </div>
+                        <div class="text-center"><br><a href="vistausuario.html"><strong>< Salir del Mapa </strong></a></div>
+                    </div>
+                </div>
             <div id="pie-pagina" class="footer"></div>
         </div>
 
@@ -36,7 +57,6 @@
         <script type="text/javascript">
             $("#pie-pagina").load("components/footer2.html");
             $("#logo").load("components/header-usuario.html");
-            $("#contenido").load("components/menu-usuario.html");
         </script>
 
 	</body>

@@ -1,0 +1,67 @@
+{
+  "fotosGeo": [
+    {
+      "albumId": 1,
+      "id": 1,
+      "title": "accusamus beatae ad facilis cum similique qui sunt",
+      "url": "http://placehold.it/600/92c952",
+      "thumbnailUrl": "http://placehold.it/150/30ac17",
+      "lat": "-33.4489122671",
+      "long": "-70.6827862129"
+    },
+    {
+      "albumId": 1,
+      "id": 2,
+      "title": "reprehenderit est deserunt velit ipsam",
+      "url": "http://placehold.it/600/771796",
+      "thumbnailUrl": "http://placehold.it/150/dff9f6",
+      "lat": "-33.450725008",
+      "long": "-70.6799484358"
+    },
+    {
+      "albumId": 1,
+      "id": 3,
+      "title": "officia porro iure quia iusto qui ipsa ut modi",
+      "url": "http://placehold.it/600/24f355",
+      "thumbnailUrl": "http://placehold.it/150/1941e9",
+      "lat": "-33.449686603",
+      "long": "-70.6872333155"
+    },
+    {
+      "albumId": 1,
+      "id": 4,
+      "title": "culpa odio esse rerum omnis laboriosam voluptate repudiandae",
+      "url": "http://placehold.it/600/d32776",
+      "thumbnailUrl": "http://placehold.it/150/39e985",
+      "lat": "-33.4496731753",
+      "long": "-70.6850768194"
+    },
+    {
+      "albumId": 1,
+      "id": 5,
+      "title": "natus nisi omnis corporis facere molestiae rerum in",
+      "url": "http://placehold.it/600/f66b97",
+      "thumbnailUrl": "http://placehold.it/150/7735a",
+      "lat": "-33.4503087523",
+      "long": "-70.6832368241"
+    },
+    {
+      "albumId": 1,
+      "id": 6,
+      "title": "accusamus ea aliquid et amet sequi nemo",
+      "url": "http://placehold.it/600/56a8c2",
+      "thumbnailUrl": "http://placehold.it/150/c672a0",
+      "lat": "-33.4503311317",
+      "long": "-70.681375371"
+    },
+    {
+      "albumId": 1,
+      "id": 7,
+      "title": "officia delectus consequatur vero aut veniam explicabo molestias",
+      "url": "http://placehold.it/600/b0f7cc",
+      "thumbnailUrl": "http://placehold.it/150/4105a5",
+      "lat": "-33.4464101747",
+      "long": "-70.6832529173"
+    }
+  ]
+}

@@ -13,7 +13,7 @@
                 when('/fotos-desde', {templateUrl: 'fotos-desde.html',   controller: 'HomeCtrl'}).
                 when('/fotos-recientes', {templateUrl: 'fotos-recientes.html',   controller: 'HomeCtrl'}).
                 when('/mapa', {templateUrl: 'mapa.html',   controller: 'HomeCtrl'}).
-                when('/mapa-mundial', {templateUrl: 'mapa-mundial.html',   controller: 'HomeCtrl'}).
+                //when('/mapa-mundial', {templateUrl: 'mapa-mundial.html',   controller: 'MapaCtrl'}).
                 when('/photostream', {templateUrl: 'photostream.html',   controller: 'HomeCtrl'}).
                 when('/subir-foto', {templateUrl: 'subir-foto.html',   controller: 'HomeCtrl'}).
                 // Otras rutas
@@ -23,10 +23,134 @@
                 otherwise({redirectTo: '/cameraroll'});
 	}]);
 
-	app.controller('MainCtrl', function($scope, Page) {
-	    console.log(Page);
-	    $scope.page= Page; 
-	});
+	// Controlador principal de la aplicación, obtiene datos de la factoría 'Page'
+    app.controller('MainCtrl', function($scope, Page) {
+        $scope.page = Page; 
+    });
+
+    // Controlador del cuadro de vistas (ng-view) de la aplicación, setea un título obtenido desde 'Page'
+    app.controller('HomeCtrl', function($scope, Page) {
+        Page.setTitle("Bienvenido");
+    });
+
+    // Controlador de la vista Demo, entrega la variable 'this.mensaje' a la vista HTML
+    app.controller('DemoCtrl', function($scope, Page) {
+        Page.setTitle("AngularJS Demo");
+        this.mensaje = "Haz click en uno de los Demos para cargarlo:";
+    });
+
+    // Variable global 'lugares', ofrece un objeto JS con datos para ser parseados
+    // (puede ser reemplazado por un JSON)
+    var lugares = [
+        {
+            lugar : 'Aquí',
+            desc : 'JAjajajajaanc',
+            url : 'img/foto7.jpg',
+            lat : -33.4499596331,
+            long : -70.686739789
+        },
+        {
+            lugar : 'You',
+            desc :'Cuanto te extraño',
+            url : 'img/foto9.jpg',
+            lat : -23.4489122671,
+            long : -40.6827862129
+        },
+        {
+            lugar : ':D',
+            desc : 'feliz',
+            url : 'img/foto17.jpg',
+            lat : -40.450725008,
+            long : -70.6799484358
+        },
+        {
+            lugar : 'lalalal',
+            desc : '',
+            url : 'img/foto15.jpg',
+            lat : -25.449686603,
+            long : -30.6872333155
+        },
+        {
+            lugar :'',
+            desc : '',
+            url : 'img/foto20.jpg',
+            lat : -33.4496731753,
+            long : -70.6850768194
+        },
+        {
+            lugar : '<3',
+            desc : 'Mi mundo',
+            url : 'img/foto13.jpg',
+            lat : -40.4503087523,
+            long : -50.6832368241
+        },
+        {
+            lugar : 'JAJAJA',
+            desc : '(Y)',
+            url : 'img/foto12.jpg',
+            lat : -45.4503311317,
+            long : -70.681375371
+        },
+        {
+            lugar : ':)',
+            desc : 'Happy',
+            url : 'img/foto5.jpg',
+            lat : -13.4464101747,
+            long : -60.6832529173
+        }
+    ];
+
+
+    // Controlador de la vista Demo Mapa
+    app.controller('MapaCtrl', function($scope, $http) {
+        // Configuramos las opciones básicas del mapa
+
+        var mapOptions = {
+            zoom: 3,
+            center: new google.maps.LatLng(-33.449147, -70.682269),
+            mapTypeId: google.maps.MapTypeId.HYBRID
+        }
+
+        // Creamos una instancia de Google Maps y la empotramos en el <div> con id 'mapa'
+        $scope.map = new google.maps.Map(document.getElementById('mapa'), mapOptions);
+
+        // Variable local para almacenar los marcadores del mapa
+        $scope.marcadores = [];
+        
+        // Creamos una instancia de ventanas informativas de Google Maps
+        var infoWindow = new google.maps.InfoWindow();
+
+        // Función para crear marcadores        
+        var crearMarcadores = function (info){
+            // Creamos un marcador con los datos del objeto JS 'info' y lo guardamos en 'marcador'
+            var marcador = new google.maps.Marker({
+                map: $scope.map,
+                position: new google.maps.LatLng(info.lat, info.long),
+                title: info.lugar
+            });
+            marcador.content = '<div class="infoWindowContent">' + info.desc + '</div>';
+            marcador.content2 = '<div class="infoWindowContent">' + '<img src="'+info.url+'" Width=200 Height=200/>' + '</div>';
+            // Añadimos un evento al marcador para que muestre la información al hacer click
+            google.maps.event.addListener(marcador, 'click', function(){
+                infoWindow.setContent('<h2>' + marcador.title + '</h2>' + marcador.content + marcador.content2);
+                infoWindow.open($scope.map, marcador);
+            });
+            
+            // Introducimos el marcador en la pila de marcadores
+            $scope.marcadores.push(marcador);
+        }  
+        
+        // Creamos los marcadores con la función recién creada y tomando los datos desde la variable global 'lugares'
+        for (i = 0; i < lugares.length; i++){
+            crearMarcadores(lugares[i]);
+        }
+
+        // Función trigger que permite reaccionar al hacer click en el marcador
+        $scope.openInfoWindow = function(e, selectedMarker){
+            e.preventDefault();
+            google.maps.event.trigger(selectedMarker, 'click');
+        }
+    });
 
 app.controller('ModalDemoCtrl', function ($scope, $modal, $log) {
 
@@ -169,8 +293,8 @@ app.controller('ModalInstanceCtrl', function ($scope, $modalInstance, items) {
         
         $http.get('http://localhost:3000/comments').success(function(data){
             store.comentarios = data;
-        });
-
+     });
+   
 
     }]);
 
