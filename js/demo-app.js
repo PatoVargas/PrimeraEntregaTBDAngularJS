@@ -12,8 +12,8 @@
                 when('/fotos-de', {templateUrl: 'fotos-de.html',   controller: 'HomeCtrl'}).
                 when('/fotos-desde', {templateUrl: 'fotos-desde.html',   controller: 'HomeCtrl'}).
                 when('/fotos-recientes', {templateUrl: 'fotos-recientes.html',   controller: 'HomeCtrl'}).
-                when('/mapa', {templateUrl: 'mapa.html',   controller: 'HomeCtrl'}).
-                //when('/mapa-mundial', {templateUrl: 'mapa-mundial.html',   controller: 'MapaCtrl'}).
+                when('/mapa', {templateUrl: 'mapa.html',   controller: 'MapaCtrl'}).
+                when('/mapa-mundial', {templateUrl: 'mapa-mundial.html',   controller: 'MapaCtrl'}).
                 when('/photostream', {templateUrl: 'photostream.html',   controller: 'HomeCtrl'}).
                 when('/subir-foto', {templateUrl: 'subir-foto.html',   controller: 'HomeCtrl'}).
                 // Otras rutas
