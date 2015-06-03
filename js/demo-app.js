@@ -16,6 +16,7 @@
                 when('/mapa-mundial', {templateUrl: 'mapa-mundial.html',   controller: 'MapaCtrl'}).
                 when('/photostream', {templateUrl: 'photostream.html',   controller: 'HomeCtrl'}).
                 when('/subir-foto', {templateUrl: 'subir-foto.html',   controller: 'HomeCtrl'}).
+                when('/buscador',{templeUrl:'buscador.html', controller:'HomeCtrl'}).
                 // Otras rutas
                 when('/list', {templateUrl: 'list.html',   controller: 'ListCtrl'}).
                 when('/detail/:itemId', {templateUrl: 'detail.html',   controller: 'DetailCtrl'}).
