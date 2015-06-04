@@ -1,5 +1,5 @@
 (function(){
-	var app = angular.module('ui.bootstrap.demo', ['ngRoute', 'appServices', "ui.bootstrap"]);
+	var app = angular.module('ui.bootstrap.demo', ['ngRoute', 'appServices', "ui.bootstrap", 'ngCookies']);
 
     app.config(['$routeProvider', function($routeProvider) {
         $routeProvider.
@@ -181,8 +181,9 @@ app.controller('ModalInstanceCtrl', function ($scope, $modalInstance, items) {
   };
 });
 
-    app.controller('loginCtrl', function($scope,loginService){
-        $scope.msgtxt='';
+    app.controller('loginCtrl', function($scope,loginService, $cookies, $cookieStore){
+        $cookieStore.remove('usuario');
+        $cookieStore.remove('pass');
         $scope.login=function(user){
             loginService.login(user,$scope);
         }
@@ -228,21 +229,15 @@ app.controller('ModalInstanceCtrl', function ($scope, $modalInstance, items) {
 
     });     
 
-    app.factory('loginService',function($http, sessionService){
+    app.factory('loginService',function($http, sessionService,$cookies, $cookieStore){
         return{
             login:function(user,scope){
-                var $promise=$http.post('JSON/user.php',user);
-                $promise.then(function(msg){
-                    var uid=msg.data;
-                    if(uid=='succes'){ 
-                        scope.msgtxt='Bien';
-                        sessionService.set('user',uid);
-                        window.location.href="vistausuario.html"; 
-                    }   
-                    else{
-                        alert("Ha fallado el inicio de sesión"); 
-                    } 
-
+                $http.post('http://localhost:3000/Inicio',user).success(function(data, status, headers, config) {
+                    $cookieStore.put('usuario', user.nombre); 
+                    $cookieStore.put('pass', user.pass);
+                    window.location.href="vistausuario.html"; 
+                    }).error(function(data, status, headers, config) {
+                    alert("Ha fallado la petición");
                 });
             }
         }
