@@ -139,7 +139,7 @@
 
 //#################################POPUPFOTOS####################################
 
-app.controller('ModalDemoCtrl', function ($scope, $modal, $log) {
+app.controller('ModalDemoCtrl', function($scope, $modal, $log, $cookies, $cookieStore) {
 
   $scope.items = ['item1', 'item2', 'item3'];
 
@@ -190,16 +190,20 @@ app.controller('ModalInstanceCtrl', function ($scope, $modalInstance, items) {
 });
 //###################################REGISTRO#############################
 
-    app.controller('RegistroCtrl', function($scope, registroService){    
+    app.controller('RegistroCtrl', function($scope, registroService,$cookies, $cookieStore){    
+        $cookieStore.remove('usuario');
+        $cookieStore.remove('pass');
         $scope.registrar=function(usuario){
             registroService.registrar(usuario,$scope);
         }
     });    
 
-    app.factory('registroService',function($http){
+    app.factory('registroService',function($http,$cookies, $cookieStore){
         return{
             registrar:function(usuario,scope){
                 $http.post('http://localhost:3000/usuarios',usuario).success(function(data, status, headers, config) {
+                    $cookieStore.put('usuario', usuario.nombre_usuario); 
+                    $cookieStore.put('pass', usuario.pass);
                     window.location.href="vistausuario.html"; 
                     }).error(function(data, status, headers, config) {
                     alert("Ha fallado la petición");
