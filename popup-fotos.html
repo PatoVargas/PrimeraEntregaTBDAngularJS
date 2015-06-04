@@ -2,10 +2,10 @@
             <h1>Título:</h1>
             <h3>Autor:</h3>
         </div>
-        <div class="modal-body">
+        <div class="modal-body" ng-controller="getFotoCookie">
             <div class="row">
                 <div class="col-xs-6" align="center">
-                <img src="img/foto12.jpg" class="img-thumbnail">
+                <img ng-src="{{URLFOTO}}" class="img-thumbnail">
                 </div>
                 <div class="col-xs-3" align="center" ng-controller="ComentariosCtrl as controlador">
                     <div class="alert alert-warning" role="alert" ng-repeat="comentarios in controlador.comentarios">
