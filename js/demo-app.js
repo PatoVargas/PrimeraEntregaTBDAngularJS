@@ -1,6 +1,8 @@
 (function(){
 	var app = angular.module('ui.bootstrap.demo', ['ngRoute', 'appServices', "ui.bootstrap", 'ngCookies']);
 
+//####################################RUTAS##################################
+
     app.config(['$routeProvider', function($routeProvider) {
         $routeProvider.
         		// Rutas de vistas
@@ -23,6 +25,8 @@
                 when('/settings', {templateUrl: 'settings.html',   controller: 'SettingsCtrl'}).
                 otherwise({redirectTo: '/cameraroll'});
 	}]);
+
+//#######################CONTROLADORESBASE##################################################
 
     app.controller('MainCtrl', function($scope, Page) {
         $scope.page = Page; 
@@ -91,6 +95,8 @@
         }
     ];
 
+//###################################FOTOSGEOLOCALIZADAS###############################3
+
     app.controller('MapaCtrl', function($scope, $http) {
 
         var mapOptions = {
@@ -130,6 +136,8 @@
             google.maps.event.trigger(selectedMarker, 'click');
         }
     });
+
+//#################################POPUPFOTOS####################################
 
 app.controller('ModalDemoCtrl', function ($scope, $modal, $log) {
 
@@ -180,15 +188,7 @@ app.controller('ModalInstanceCtrl', function ($scope, $modalInstance, items) {
     $modalInstance.dismiss('cancel');
   };
 });
-
-    app.controller('loginCtrl', function($scope,loginService, $cookies, $cookieStore){
-        $cookieStore.remove('usuario');
-        $cookieStore.remove('pass');
-        $scope.login=function(user){
-            loginService.login(user,$scope);
-        }
-        
-    });
+//###################################REGISTRO#############################
 
     app.controller('RegistroCtrl', function($scope, registroService){    
         $scope.registrar=function(usuario){
@@ -210,6 +210,16 @@ app.controller('ModalInstanceCtrl', function ($scope, $modalInstance, items) {
 
     });
 
+//########################COMENTARIOS#####################################
+    app.controller('ComentariosCtrl', [ '$http', function($http) {
+        var store = this;
+        store.comentarios = [];
+        
+        $http.get('http://localhost:3000/comments').success(function(data){
+            store.comentarios = data;
+            });
+        }]);
+
         app.controller('comentarCtrl', function($scope, comentarService){    
         $scope.comentar=function(comentario){
             comentarService.comentar(comentario,$scope);
@@ -228,6 +238,16 @@ app.controller('ModalInstanceCtrl', function ($scope, $modalInstance, items) {
         }
 
     });     
+
+//########################LOGINUSUARIO#####################################
+    app.controller('loginCtrl', function($scope,loginService, $cookies, $cookieStore){
+        $cookieStore.remove('usuario');
+        $cookieStore.remove('pass');
+        $scope.login=function(user){
+            loginService.login(user,$scope);
+        }
+        
+    });
 
     app.factory('loginService',function($http, sessionService,$cookies, $cookieStore){
         return{
@@ -258,10 +278,7 @@ app.controller('ModalInstanceCtrl', function ($scope, $modalInstance, items) {
         };
     }]);
 
-	app.controller('HomeCtrl', function($scope, Page) {
-	    Page.setTitle("Bienvenido");
-	});
-
+//#####################################CAMARAS##################################
 	app.controller('camarasCtrl', [ '$http', function($http) {
 		var store = this;
 		store.camaras = [];
@@ -270,6 +287,8 @@ app.controller('ModalInstanceCtrl', function ($scope, $modalInstance, items) {
 			store.camaras = data;
 		});	
 	}]);
+
+//##################################FOTOS############################################
 
     app.controller('FotosCtrl', [ '$http', function($http) {
         var store = this;
@@ -280,17 +299,7 @@ app.controller('ModalInstanceCtrl', function ($scope, $modalInstance, items) {
         }); 
     }]);
 
-
-    app.controller('ComentariosCtrl', [ '$http', function($http) {
-        var store = this;
-        store.comentarios = [];
-        
-        $http.get('http://localhost:3000/comments').success(function(data){
-            store.comentarios = data;
-     });
-        
-
-    }]);
+//####################################################################################
 
 	var app = angular.module('appServices', []);
 
