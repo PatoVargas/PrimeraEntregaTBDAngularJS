@@ -1,7 +1,7 @@
 <div class="container-fluid" ng-controller='ModalDemoCtrl'>	
 	<div class="row">
 		<div class="col-xs-2 col-xs-offset-2" ng-controller="fotosCameraRollCtrl as controlador">
-			<h3><font color="blue">Marzo,13,2014</font></h3>
+			<h3><font color="blue">Marzo 2014</font></h3>
 			<div class="thumbnail" ng-repeat="fotos in controlador.fotosPropias">
 				<img src="{{fotos.url}}" class="img-thumbnail" ng-model="fotos.url" id="fotoActual" ng-click="open('lg',fotos.url)">
 				<div class="caption">

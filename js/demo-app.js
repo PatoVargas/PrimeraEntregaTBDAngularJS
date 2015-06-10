@@ -35,69 +35,22 @@
     app.controller('HomeCtrl', function($scope, Page) {
         Page.setTitle("Bienvenido");
     });
-
-    var lugares = [
-        {
-            lugar : 'Aquí',
-            desc : 'JAjajajajaanc',
-            url : 'img/foto7.jpg',
-            lat : -33.4499596331,
-            long : -70.686739789
-        },
-        {
-            lugar : 'You',
-            desc :'Cuanto te extraño',
-            url : 'img/foto9.jpg',
-            lat : -23.4489122671,
-            long : -40.6827862129
-        },
-        {
-            lugar : ':D',
-            desc : 'feliz',
-            url : 'img/foto17.jpg',
-            lat : -40.450725008,
-            long : -70.6799484358
-        },
-        {
-            lugar : 'lalalal',
-            desc : '',
-            url : 'img/foto15.jpg',
-            lat : -25.449686603,
-            long : -30.6872333155
-        },
-        {
-            lugar :'',
-            desc : '',
-            url : 'img/foto20.jpg',
-            lat : -33.4496731753,
-            long : -70.6850768194
-        },
-        {
-            lugar : '<3',
-            desc : 'Mi mundo',
-            url : 'img/foto13.jpg',
-            lat : -40.4503087523,
-            long : -50.6832368241
-        },
-        {
-            lugar : 'JAJAJA',
-            desc : '(Y)',
-            url : 'img/foto12.jpg',
-            lat : -45.4503311317,
-            long : -70.681375371
-        },
-        {
-            lugar : ':)',
-            desc : 'Happy',
-            url : 'img/foto5.jpg',
-            lat : -13.4464101747,
-            long : -60.6832529173
-        }
-    ];
+    var fotosGeolocalizadas =[];
 
 //###################################FOTOSGEOLOCALIZADAS###############################3
 
     app.controller('MapaCtrl', function($scope, $http) {
+        var store = this;
+        store.fotos = [];
+        $http.get('http://localhost:3000/Fotos').success(function(data){
+            store.fotos = data;
+            for( i = 0 ; i < store.fotos.length ; i++){
+                    fotosGeolocalizadas.push(store.fotos[i]);
+            }
+            for (i = 0; i < fotosGeolocalizadas.length; i++){
+                crearMarcadores(fotosGeolocalizadas[i]);
+            } 
+        });
 
         var mapOptions = {
             zoom: 3,
@@ -115,9 +68,9 @@
             var marcador = new google.maps.Marker({
                 map: $scope.map,
                 position: new google.maps.LatLng(info.lat, info.long),
-                title: info.lugar
+                title: info.titulo
             });
-            marcador.content = '<div class="infoWindowContent">' + info.desc + '</div>';
+            marcador.content = '<div class="infoWindowContent">' + info.descripcion + '</div>';
             marcador.content2 = '<div class="infoWindowContent">' + '<img src="'+info.url+'" Width=200 Height=200/>' + '</div>';
             google.maps.event.addListener(marcador, 'click', function(){
                 infoWindow.setContent('<h2>' + marcador.title + '</h2>' + marcador.content + marcador.content2);
@@ -127,15 +80,15 @@
             $scope.marcadores.push(marcador);
         }  
         
-        for (i = 0; i < lugares.length; i++){
-            crearMarcadores(lugares[i]);
-        }
+        
 
         $scope.openInfoWindow = function(e, selectedMarker){
             e.preventDefault();
             google.maps.event.trigger(selectedMarker, 'click');
         }
     });
+
+    
 
 //#################################POPUPFOTOS##################################################
 
