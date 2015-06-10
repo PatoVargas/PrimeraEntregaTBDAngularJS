@@ -137,38 +137,34 @@
         }
     });
 
-//#################################POPUPFOTOS####################################
+//#################################POPUPFOTOS##################################################
 
-app.controller('ModalDemoCtrl', function($scope, $modal, $log, $cookies, $cookieStore) {
-  $scope.animationsEnabled = true;
-  $scope.open = function (size,url) {
-    $cookieStore.put('urlFoto',url);
-    var modalInstance = $modal.open({
-      animation: $scope.animationsEnabled,
-      templateUrl: 'popup-fotos.html',
-      controller: 'ModalInstanceCtrl',
-      size: size
+    app.controller('ModalDemoCtrl', function($scope, $modal, $log, $cookies, $cookieStore) {
+        $scope.animationsEnabled = true;
+        $scope.open = function (size,url) {
+            $cookieStore.put('urlFoto',url);
+            var modalInstance = $modal.open({
+                animation: $scope.animationsEnabled,
+                templateUrl: 'popup-fotos.html',
+                controller: 'ModalInstanceCtrl',
+                size: size
+            });
+        };
+        $scope.toggleAnimation = function () {
+            $scope.animationsEnabled = !$scope.animationsEnabled;
+        };
+
     });
-  };
-  $scope.toggleAnimation = function () {
-    $scope.animationsEnabled = !$scope.animationsEnabled;
-  };
 
-});
+    app.controller('ModalInstanceCtrl', function ($scope, $modalInstance) {
+        $scope.ok = function () {
+            $modalInstance.close();
+        };
 
-app.controller('ModalInstanceCtrl', function ($scope, $modalInstance) {
-  $scope.ok = function () {
-    $modalInstance.close();
-  };
-
-  $scope.cancel = function () {
-    $modalInstance.dismiss('cancel');
-  };
-});
-
-app.controller('getFotoCookie',function($scope,$cookieStore,$cookies){
-    $scope.URLFOTO = $cookieStore.get('urlFoto');
-});
+        $scope.cancel = function () {
+            $modalInstance.dismiss('cancel');
+        };
+    });
 
 //###################################REGISTRO#############################
 
@@ -288,6 +284,9 @@ app.controller('getFotoCookie',function($scope,$cookieStore,$cookies){
 	}]);
 
 //##################################FOTOS############################################
+    app.controller('getFotoCookie',function($scope,$cookieStore,$cookies){
+        $scope.URLFOTO = $cookieStore.get('urlFoto');
+    });
 
     app.controller('FotosCtrl', [ '$http', function($http) {
         var store = this;
@@ -297,6 +296,24 @@ app.controller('getFotoCookie',function($scope,$cookieStore,$cookies){
             store.fotos = data;
         }); 
     }]);
+
+    app.controller('fotosCameraRollCtrl', function($http,$cookieStore,$cookies) {
+        var store = this;
+        store.fotos = [];
+        store.fotosPropias = [];
+        
+        $http.get('http://localhost:3000/Fotos').success(function(data){
+            store.fotos = data;
+            for( i = 0 ; i < store.fotos.length ; i++){
+                if(store.fotos[i].idUsuario == $cookieStore.get('idUsuario')){
+                    store.fotosPropias.push(store.fotos[i]);
+                }
+            } 
+        });
+
+        
+    });
+
 
 //####################################################################################
 
