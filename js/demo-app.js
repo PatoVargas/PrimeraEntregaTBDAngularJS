@@ -174,7 +174,7 @@ app.controller('getFotoCookie',function($scope,$cookieStore,$cookies){
 
     app.controller('RegistroCtrl', function($scope, registroService,$cookies, $cookieStore){    
         $cookieStore.remove('usuario');
-        $cookieStore.remove('pass');
+        $cookieStore.remove('idUsuario');
         $scope.registrar=function(usuario){
             registroService.registrar(usuario,$scope);
         }
@@ -185,7 +185,6 @@ app.controller('getFotoCookie',function($scope,$cookieStore,$cookies){
             registrar:function(usuario,scope){
                 $http.post('http://localhost:3000/usuarios',usuario).success(function(data, status, headers, config) {
                     $cookieStore.put('usuario', usuario.nombre_usuario); 
-                    $cookieStore.put('pass', usuario.pass);
                     window.location.href="vistausuario.html"; 
                     }).error(function(data, status, headers, config) {
                     alert("Ha fallado la petición");
@@ -228,7 +227,7 @@ app.controller('getFotoCookie',function($scope,$cookieStore,$cookies){
 //########################LOGINUSUARIO#####################################
     app.controller('loginCtrl', function($scope,loginService, $cookies, $cookieStore){
         $cookieStore.remove('usuario');
-        $cookieStore.remove('pass');
+        $cookieStore.remove('idUsuario');
         $scope.login=function(user){
             loginService.login(user,$scope);
         }
@@ -240,7 +239,6 @@ app.controller('getFotoCookie',function($scope,$cookieStore,$cookies){
             login:function(user,scope){
                 $http.post('http://localhost:3000/Inicio',user).success(function(data, status, headers, config) {
                     $cookieStore.put('usuario', user.nombre); 
-                    $cookieStore.put('pass', user.pass);
                     window.location.href="vistausuario.html"; 
                     }).error(function(data, status, headers, config) {
                     alert("Ha fallado la petición");
@@ -248,6 +246,21 @@ app.controller('getFotoCookie',function($scope,$cookieStore,$cookies){
             }
         }
 
+    });
+
+    app.controller('getidUsuario',function($scope,$cookieStore,$cookies,$http){
+        var store = this;
+        store.usuarios = [];
+        
+        $http.get('http://localhost:3000/usuarios').success(function(data){
+            store.usuarios = data;
+            for (i = 0; i < store.usuarios.length; i++){
+                if(String(store.usuarios[i].nombre_usuario) == $cookieStore.get('usuario')){
+                    $cookieStore.put('idUsuario',store.usuarios[i].id);
+                }
+            }
+        });
+        
     });
 
     app.factory('sessionService', ['$http', function($http){
@@ -280,7 +293,7 @@ app.controller('getFotoCookie',function($scope,$cookieStore,$cookies){
         var store = this;
         store.fotos = [];
         
-        $http.get('JSON/fotos.json').success(function(data){
+        $http.get('http://localhost:3000/Fotos').success(function(data){
             store.fotos = data;
         }); 
     }]);
