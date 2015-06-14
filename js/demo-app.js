@@ -226,6 +226,16 @@
         };
     }]);
 
+//##########################LOGOUT##########################################
+
+    app.controller('logoutCtrl', function($scope, $cookies, $cookieStore){
+        $scope.logout=function(){
+            $cookieStore.remove('usuario');
+            $cookieStore.remove('idUsuario');
+            window.location.href="index.html";
+            }    
+    });
+
 //#####################################CAMARAS##################################
 	app.controller('camarasCtrl', [ '$http', function($http) {
 		var store = this;

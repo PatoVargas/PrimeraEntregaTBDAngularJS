@@ -11,7 +11,7 @@
 	
     <body>
 		<div ng-controller="MainCtrl">
-            <div id="logo" class="header"></div>
+            <ng-include src="'components/header-usuario.html'"></ng-include>
             <div id="contenido"></div>
             <ng-view></ng-view>
             <div ng-controller="getidUsuario"></div>
