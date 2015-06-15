@@ -88,7 +88,6 @@
         }
     });
 
-    
 
 //#################################POPUPFOTOS##################################################
 
@@ -232,6 +231,8 @@
         $scope.logout=function(){
             $cookieStore.remove('usuario');
             $cookieStore.remove('idUsuario');
+            $cookieStore.remove('urlFoto');
+            $cookieStore.remove('idFoto');
             window.location.href="index.html";
             }    
     });
@@ -247,8 +248,21 @@
 	}]);
 
 //##################################FOTOS############################################
-    app.controller('getFotoCookie',function($scope,$cookieStore,$cookies){
+    app.controller('getFotoCookie',function($scope,$cookieStore,$cookies,$http){
         $scope.URLFOTO = $cookieStore.get('urlFoto');
+        var store = this;
+        store.fotos = [];
+        store.foto;
+        
+        $http.get('http://localhost:3000/Fotos').success(function(data){
+            store.fotos = data;
+            for (i = 0; i < store.fotos.length; i++){
+                if(String(store.fotos[i].url) == $scope.URLFOTO){
+                    $cookieStore.put('idFoto',store.fotos[i].id);
+                    store.foto = store.fotos[i];
+                }
+            }
+        });
     });
 
     app.controller('FotosCtrl', [ '$http', function($http) {

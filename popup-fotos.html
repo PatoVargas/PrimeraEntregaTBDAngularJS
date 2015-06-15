@@ -1,8 +1,10 @@
+    <div ng-controller="getFotoCookie as controladorfoto">
         <div class="modal-header">
-            <h1>Título:</h1>
-            <h3>Autor:</h3>
+            <h1>Título: {{ controladorfoto.foto.titulo }} </h1>
+            <h2>Descripción: {{ controladorfoto.foto.descripcion }}</h2>
+            <h3>Autor: {{controladorfoto.foto.idUsuario}}</h3>
         </div>
-        <div class="modal-body" ng-controller="getFotoCookie">
+        <div class="modal-body">
             <div class="row">
                 <div class="col-xs-6" align="center">
                 <img ng-src="{{URLFOTO}}" class="img-thumbnail">
@@ -29,3 +31,4 @@
                 </div>
         </div>
         </div>
+    </div>
