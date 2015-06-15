@@ -88,7 +88,6 @@
         }
     });
 
-
 //#################################POPUPFOTOS##################################################
 
     app.controller('ModalDemoCtrl', function($scope, $modal, $log, $cookies, $cookieStore) {
@@ -116,6 +115,22 @@
         $scope.cancel = function () {
             $modalInstance.dismiss('cancel');
         };
+    });
+
+    app.controller('getUsuarioFoto',function($scope,$cookieStore,$cookies,$http){
+        $scope.IDUSUARIO = $cookieStore.get('idUsuarioFoto');
+        var store = this;
+        store.usuarios = [];
+        store.usuario;
+        
+        $http.get('http://localhost:3000/usuarios').success(function(data){
+            store.usuarios = data;
+            for (i = 0; i < store.usuarios.length; i++){
+                if(String(store.usuarios[i].id) == $scope.IDUSUARIO){
+                    store.usuario = store.usuarios[i];
+                }
+            }
+        });
     });
 
 //###################################REGISTRO#############################
@@ -233,6 +248,7 @@
             $cookieStore.remove('idUsuario');
             $cookieStore.remove('urlFoto');
             $cookieStore.remove('idFoto');
+            $cookieStore.remove('idUsuarioFoto');
             window.location.href="index.html";
             }    
     });
@@ -259,6 +275,7 @@
             for (i = 0; i < store.fotos.length; i++){
                 if(String(store.fotos[i].url) == $scope.URLFOTO){
                     $cookieStore.put('idFoto',store.fotos[i].id);
+                    $cookieStore.put('idUsuarioFoto',store.fotos[i].idUsuario);
                     store.foto = store.fotos[i];
                 }
             }
