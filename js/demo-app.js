@@ -25,7 +25,72 @@
                 when('/settings', {templateUrl: 'settings.html',   controller: 'SettingsCtrl'}).
                 otherwise({redirectTo: '/cameraroll'});
 	}]);
+//###########################SUBIRFOTOS#####################################################
 
+app.controller('subirFotosCtrl', ['$scope', 'upload', function ($scope, upload) 
+{
+    $scope.uploadFile = function()
+    {
+        var titulo = $scope.titulo;
+        var descripcion = $scope.descripcion;
+        var tags = $scope.tags;
+        var personas = $scope.personas;
+        var album = $scope.album;
+        var privacidad = $scope.privacidad;
+        var file = $scope.file;
+        
+        upload.uploadFile(file, titulo, descripcion, tags, personas, album, privacidad).then(function(res)
+        {
+            console.log(res);
+        })
+    }
+}])
+
+app.directive('uploaderModel', ["$parse", function ($parse) {
+    return {
+        restrict: 'A',
+        link: function (scope, iElement, iAttrs) 
+        {
+            iElement.on("change", function(e)
+            {
+                $parse(iAttrs.uploaderModel).assign(scope, iElement[0].files[0]);
+            });
+        }
+    };
+}])
+
+app.service('upload', ["$http", "$q", function ($http, $q) 
+{
+    this.uploadFile = function(file, titulo, descripcion, tags, personas, album, privacidad)
+    {
+        var deferred = $q.defer();
+        var formData = new FormData();
+        formData.append("titulo", titulo);
+        formData.append("descripcion", descripcion);
+        formData.append("tags", tags);
+        formData.append("personas", personas);
+        formData.append("album", album);
+        formData.append("privacidad", privacidad);
+        formData.append("file", file);
+        return $http.post("server.php", formData, {
+            headers: {
+                "Content-type": undefined
+            },
+            transformRequest: angular.identity
+        })
+        .success(function(res)
+        {
+            deferred.resolve(res);
+            console.log("Si");
+        })
+        .error(function(msg, code)
+        {
+            deferred.reject(msg);
+            console.log("No");
+        })
+        return deferred.promise;
+    }   
+}])
 //#######################CONTROLADORESBASE##################################################
 
     app.controller('MainCtrl', function($scope, Page) {

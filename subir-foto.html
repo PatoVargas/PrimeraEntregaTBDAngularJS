@@ -1,58 +1,38 @@
-<div class="container-fluid">	
+<div class="container-fluid" data-ng-controller="subirFotosCtrl">	
 	<div class="row">
 		<div class="col-xs-6">
-			<div class="form-group">
-				<label for="ejemplo_archivo_1"><font color="blue">Elija su Foto</font></label>
-				<input type="file" id="ejemplo_archivo_1">
-			</div>
-			<div class="form-group">
-				<label for="titulo"><font color="blue">Título</font></label>
-				<input type="text" class="form-control" id="titulo" placeholder="Título de la foto">
-			</div>
-			<div class="form-group">
-				<label for="desc"><font color="blue">Descripción</font></label>
-				<input type="text" class="form-control" id="desc" placeholder="Describa su foto">
-			</div>
-			<div class="form-group">
-				<label for="tag"><font color="blue">Descripción</font></label>
-				<input type="text" class="form-control" id="tag" placeholder="Tags o etiquetas">
-			</div>
-			<div class="form-group">
-				<label for="pers"><font color="blue">Personas</font></label>
-				<input type="text" class="form-control" id="pers" placeholder="Gente en la foto">
-			</div>
-			<div class="form-group">
-				<label for="album"><font color="blue">Álbum</font></label>
-				<select class="form-group">
-					<option>Album 1</option>
-					<option>Paseo</option>
-					<option>Crear álbum nuevo</option>
-				</select>
-			</div>
-			<div class="form-group">
-				<label for="album"><font color="blue">Privacidad</font></label>
-				<select class="form-group">
-					<option>Público</option>
-					<option>Familiares y amigos</option>
-					<option>Seguidores</option>
-					<option>Seguidores, familiares y amigos</option>
-					<option>Solo yo</option>
-				</select>
-			</div>
-		</div>
-		<div class="col-xs-2">
-			<h4><font color="blue">Agregar otra foto</font></h4>
-			<button type="button" class="btn btn-default"><a href="vistausuario.html">
-				<span class="glyphicon glyphicon-plus"></span></a>
-			</button>
-			<h4><font color="blue">Subir</font></h4>
-			<button type="button" class="btn btn-default"><a href="vistausuario.html">
-				<span class="glyphicon glyphicon-floppy-open"></span></a>
-			</button>
-			<h4><font color="blue">Cancelar</font></h4>
-			<button type="button" class="btn btn-default"><a href="vistausuario.html">
-				<span class="glyphicon glyphicon-remove"></span></a>
-			</button>
+			<form name="upload" ng-submit="uploadFile()">
+				<div>
+					<label for="ejemplo_archivo_1"><font color="blue">Elija su Foto</font></label>
+					<input type="file" name="file" uploader-model="file" /> <br>
+				</div>
+				<div>
+					<label for="titulo"><font color="blue">Título</font></label>
+					<input type="text" ng-model="titulo" /><br>
+
+				</div>
+				<div>
+					<label for="desc"><font color="blue">Descripción</font></label>
+					<input type="text" ng-model="descripcion" /><br>
+				</div>
+				<div>
+					<label for="tag"><font color="blue">Tags</font></label>
+					<input type="text" ng-model="tags" /><br>
+				</div>
+				<div>
+					<label for="pers"><font color="blue">Personas</font></label>
+					<input type="text" ng-model="personas" /><br>
+				</div>
+				<div>
+					<label for="album"><font color="blue">Álbum</font></label>
+					<input type="text" ng-model="album" /><br>
+				</div>
+				<div >
+					<label for="album"><font color="blue">Privacidad</font></label>
+					<input type="text" ng-model="privacidad" nbh/><br>
+				</div>
+				<input type="submit" value="Enviar"> 
+			</form>
 		</div>
 	</div>
 </div>
