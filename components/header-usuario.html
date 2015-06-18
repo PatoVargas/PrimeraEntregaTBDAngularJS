@@ -31,11 +31,11 @@
 	<div class="col-xs-8">
 		<h1></h1>
 		<form class="form-horizontal" role="form">
-			<div>
-				<button type="search" class="btn btn-default"><a id="buscador" href="#/buscador"><span class="glyphicon glyphicon-search"></span></a></button>
+			<div ng-controller="busquedaCtrl">
 				<div class="col-xs-3">
-					<input type="busqueda" class="form-control" id="ejemplo_busqueda" placeholder="País, ciudad, etc">
+					<input type="text" class="form-control" required ng-model="busqueda.texto">
 				</div>
+				<button type="search" class="btn btn-default"><a id="buscador" href="#/buscador"><span class="glyphicon glyphicon-search" ng-click="buscar(busqueda)"></span></a></button>
 			</div>
 		</form>
 	</div>

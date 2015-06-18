@@ -25,72 +25,74 @@
                 when('/settings', {templateUrl: 'settings.html',   controller: 'SettingsCtrl'}).
                 otherwise({redirectTo: '/cameraroll'});
 	}]);
+
 //###########################SUBIRFOTOS#####################################################
 
-app.controller('subirFotosCtrl', ['$scope', 'upload', function ($scope, upload) 
-{
-    $scope.uploadFile = function()
+    app.controller('subirFotosCtrl', ['$scope', 'upload', function ($scope, upload) 
     {
-        var titulo = $scope.titulo;
-        var descripcion = $scope.descripcion;
-        var tags = $scope.tags;
-        var personas = $scope.personas;
-        var album = $scope.album;
-        var privacidad = $scope.privacidad;
-        var file = $scope.file;
-        
-        upload.uploadFile(file, titulo, descripcion, tags, personas, album, privacidad).then(function(res)
+        $scope.uploadFile = function()
         {
-            console.log(res);
-        })
-    }
-}])
-
-app.directive('uploaderModel', ["$parse", function ($parse) {
-    return {
-        restrict: 'A',
-        link: function (scope, iElement, iAttrs) 
-        {
-            iElement.on("change", function(e)
+            var titulo = $scope.titulo;
+            var descripcion = $scope.descripcion;
+            var tags = $scope.tags;
+            var personas = $scope.personas;
+            var album = $scope.album;
+            var privacidad = $scope.privacidad;
+            var file = $scope.file;
+            
+            upload.uploadFile(file, titulo, descripcion, tags, personas, album, privacidad).then(function(res)
             {
-                $parse(iAttrs.uploaderModel).assign(scope, iElement[0].files[0]);
-            });
+                console.log(res);
+            })
         }
-    };
-}])
+    }])
 
-app.service('upload', ["$http", "$q", function ($http, $q) 
-{
-    this.uploadFile = function(file, titulo, descripcion, tags, personas, album, privacidad)
+    app.directive('uploaderModel', ["$parse", function ($parse) {
+        return {
+            restrict: 'A',
+            link: function (scope, iElement, iAttrs) 
+            {
+                iElement.on("change", function(e)
+                {
+                    $parse(iAttrs.uploaderModel).assign(scope, iElement[0].files[0]);
+                });
+            }
+        };
+    }])
+
+    app.service('upload', ["$http", "$q", function ($http, $q) 
     {
-        var deferred = $q.defer();
-        var formData = new FormData();
-        formData.append("titulo", titulo);
-        formData.append("descripcion", descripcion);
-        formData.append("tags", tags);
-        formData.append("personas", personas);
-        formData.append("album", album);
-        formData.append("privacidad", privacidad);
-        formData.append("file", file);
-        return $http.post("server.php", formData, {
-            headers: {
-                "Content-type": undefined
-            },
-            transformRequest: angular.identity
-        })
-        .success(function(res)
+        this.uploadFile = function(file, titulo, descripcion, tags, personas, album, privacidad)
         {
-            deferred.resolve(res);
-            console.log("Si");
-        })
-        .error(function(msg, code)
-        {
-            deferred.reject(msg);
-            console.log("No");
-        })
-        return deferred.promise;
-    }   
-}])
+            var deferred = $q.defer();
+            var formData = new FormData();
+            formData.append("titulo", titulo);
+            formData.append("descripcion", descripcion);
+            formData.append("tags", tags);
+            formData.append("personas", personas);
+            formData.append("album", album);
+            formData.append("privacidad", privacidad);
+            formData.append("file", file);
+            return $http.post("server.php", formData, {
+                headers: {
+                    "Content-type": undefined
+                },
+                transformRequest: angular.identity
+            })
+            .success(function(res)
+            {
+                deferred.resolve(res);
+                console.log("Si");
+            })
+            .error(function(msg, code)
+            {
+                deferred.reject(msg);
+                console.log("No");
+            })
+            return deferred.promise;
+        }   
+    }])
+
 //#######################CONTROLADORESBASE##################################################
 
     app.controller('MainCtrl', function($scope, Page) {
@@ -101,6 +103,7 @@ app.service('upload', ["$http", "$q", function ($http, $q)
         Page.setTitle("Bienvenido");
     });
     var fotosGeolocalizadas =[];
+    var fotosGeolocalizadasPropias =[];
 
 //###################################FOTOSGEOLOCALIZADAS###############################3
 
@@ -146,6 +149,56 @@ app.service('upload', ["$http", "$q", function ($http, $q)
         }  
         
         
+
+        $scope.openInfoWindow = function(e, selectedMarker){
+            e.preventDefault();
+            google.maps.event.trigger(selectedMarker, 'click');
+        }
+    });
+
+    app.controller('MapaPropioCtrl', function($scope, $http, $cookieStore, $cookies) {
+        var store = this;
+        store.fotos = [];
+        $http.get('http://localhost:3000/Fotos').success(function(data){
+            store.fotos = data;
+            for( i = 0 ; i < store.fotos.length ; i++){
+                if(store.fotos[i].idUsuario == $cookieStore.get('idUsuario')){
+                    fotosGeolocalizadasPropias.push(store.fotos[i]);
+                }
+            }
+            for (i = 0; i < fotosGeolocalizadas.length; i++){
+                crearMarcadores(fotosGeolocalizadasPropias[i]);
+            } 
+        });
+
+        var mapOptions = {
+            zoom: 3,
+            center: new google.maps.LatLng(-33.449147, -70.682269),
+            mapTypeId: google.maps.MapTypeId.HYBRID
+        }
+
+        $scope.map = new google.maps.Map(document.getElementById('mapa'), mapOptions);
+
+        $scope.marcadores = [];
+        
+        var infoWindow = new google.maps.InfoWindow();
+       
+        var crearMarcadores = function (info){
+            var marcador = new google.maps.Marker({
+                map: $scope.map,
+                position: new google.maps.LatLng(info.lat, info.long),
+                title: info.titulo
+            });
+            marcador.content = '<div class="infoWindowContent">' + info.descripcion + '</div>';
+            marcador.content2 = '<div class="infoWindowContent">' + '<img src="'+info.url+'" Width=200 Height=200/>' + '</div>';
+            google.maps.event.addListener(marcador, 'click', function(){
+                infoWindow.setContent('<h2>' + marcador.title + '</h2>' + marcador.content + marcador.content2);
+                infoWindow.open($scope.map, marcador);
+            });
+            
+            $scope.marcadores.push(marcador);
+        }  
+            
 
         $scope.openInfoWindow = function(e, selectedMarker){
             e.preventDefault();
@@ -224,6 +277,7 @@ app.service('upload', ["$http", "$q", function ($http, $q)
     });
 
 //########################COMENTARIOS#####################################
+    
     app.controller('ComentariosCtrl', [ '$http', function($http) {
         var store = this;
         store.comentarios = [];
@@ -236,8 +290,8 @@ app.service('upload', ["$http", "$q", function ($http, $q)
         app.controller('comentarCtrl', function($scope, comentarService){    
         $scope.comentar=function(comentario){
             comentarService.comentar(comentario,$scope);
-        }
-    });    
+            }
+        });    
 
     app.factory('comentarService',function($http){
         return{
@@ -253,6 +307,7 @@ app.service('upload', ["$http", "$q", function ($http, $q)
     });     
 
 //########################LOGINUSUARIO#####################################
+    
     app.controller('loginCtrl', function($scope,loginService, $cookies, $cookieStore){
         $cookieStore.remove('usuario');
         $cookieStore.remove('idUsuario');
@@ -373,9 +428,28 @@ app.service('upload', ["$http", "$q", function ($http, $q)
         
     });
 
+//#####################################BUSCADOR########################################
 
-//####################################################################################
+    app.controller('busquedaCtrl', function($scope, buscarService){    
+        $scope.buscar=function(busqueda){
+            buscarService.buscar(busqueda,$scope);
+            }
+    });    
 
+    app.factory('buscarService',function($http){
+        return{
+            buscar:function(busqueda,scope){
+                $http.post('http://localhost:3000/Busqueda',busqueda).success(function(data, status, headers, config) {
+                    alert("Buscando");
+                    }).error(function(data, status, headers, config) {
+                    alert("Ha fallado la petición");
+                });
+            }
+        }
+
+    }); 
+
+//######################################################################################
 	var app = angular.module('appServices', []);
 
 	app.factory('Page', function($rootScope) {
