@@ -293,8 +293,10 @@
             });
         });
 
-        app.controller('comentarCtrl', function($scope, comentarService){    
+        app.controller('comentarCtrl', function($scope, comentarService,$cookieStore,$cookies){    
         $scope.comentar=function(comentario){
+            comentario.idImagen = $cookieStore.get('idFoto');
+            comentario.idUsuario = $cookieStore.get('idUsuario');
             comentarService.comentar(comentario,$scope);
             }
         });    

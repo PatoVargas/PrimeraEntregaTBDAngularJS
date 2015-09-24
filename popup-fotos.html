@@ -13,6 +13,7 @@
                     <div class="alert alert-warning" role="alert" ng-repeat="comentarios in controlador.comentariosFiltrados">
                     <p>"{{ comentarios.textoComentario }}"</p>
                     <p><strong>{{ comentarios.usuarioidusuario.username }}</strong></p>
+                    <h6><p>{{ comentarios.fechaComentario }}</p></h6>
                     </div>
                 </div>
             </div>
@@ -22,7 +23,7 @@
             <div class="row">
                 <div class="col-xs-6" align="center">
                     <div class="input-group">
-                        <input type="text" class="form-control input-lg" required ng-model="comentario.body">
+                        <input type="text" class="form-control input-lg" required ng-model="comentario.textoComentario">
                     </div>
                 </div>
                 <div class="col-xs-3" align="center" ng-controller="comentarCtrl">
