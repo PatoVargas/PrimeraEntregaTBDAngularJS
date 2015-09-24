@@ -7,6 +7,7 @@
         $routeProvider.
         		// Rutas de vistas
                 when('/cameraroll', {templateUrl: 'cameraroll.html',   controller: 'HomeCtrl'}).
+                when('/PerfilUsuario', {templateUrl: 'PerfildeUsuario.html',   controller: 'HomeCtrl'}).
                 when('/actividad-reciente', {templateUrl: 'actividad-reciente.html',   controller: 'HomeCtrl'}).
                 when('/album', {templateUrl: 'album.html',   controller: 'HomeCtrl'}).
                 when('/buscador-camaras', {templateUrl: 'buscador-camaras.html',   controller: 'HomeCtrl'}).
@@ -241,16 +242,31 @@
         store.usuarios = [];
         store.usuario;
         
-        $http.get('http://localhost:3000/usuarios').success(function(data){
+        $http.get('http://localhost:3000/Usuarios2').success(function(data){
             store.usuarios = data;
             for (i = 0; i < store.usuarios.length; i++){
-                if(String(store.usuarios[i].id) == $scope.IDUSUARIO){
+                if(String(store.usuarios[i].idUsuario) == $scope.IDUSUARIO){
                     store.usuario = store.usuarios[i];
                 }
             }
         });
     });
 
+    app.controller('getUsuario',function($scope,$cookieStore,$cookies,$http){
+        $scope.IDUSUARIO = $cookieStore.get('idUsuario');
+        var store = this;
+        store.usuarios = [];
+        store.usuario;
+        
+        $http.get('http://localhost:3000/Usuarios2').success(function(data){
+            store.usuarios = data;
+            for (i = 0; i < store.usuarios.length; i++){
+                if(String(store.usuarios[i].idUsuario) == $scope.IDUSUARIO){
+                    store.usuario = store.usuarios[i];
+                }
+            }
+        });
+    });
 //###################################REGISTRO#############################
 
     app.controller('RegistroCtrl', function($scope, registroService,$cookies, $cookieStore){    
