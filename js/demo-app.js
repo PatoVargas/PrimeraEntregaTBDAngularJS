@@ -278,14 +278,20 @@
 
 //########################COMENTARIOS#####################################
     
-    app.controller('ComentariosCtrl', [ '$http', function($http) {
+    app.controller('ComentariosCtrl',function($http,$cookieStore,$cookies) {
         var store = this;
         store.comentarios = [];
+        store.comentariosFiltrados = [];
         
         $http.get('http://localhost:3000/comments').success(function(data){
             store.comentarios = data;
+            for(i = 0; i < store.comentarios.length; i++){
+                if(String(store.comentarios[i].idFoto)==$cookieStore.get('idFoto')){
+                    store.comentariosFiltrados.push(store.comentarios[i]);
+                    }
+                }
             });
-        }]);
+        });
 
         app.controller('comentarCtrl', function($scope, comentarService){    
         $scope.comentar=function(comentario){
@@ -335,11 +341,11 @@
         var store = this;
         store.usuarios = [];
         
-        $http.get('http://localhost:3000/usuarios').success(function(data){
+        $http.get('http://localhost:3000/Usuarios2').success(function(data){
             store.usuarios = data;
             for (i = 0; i < store.usuarios.length; i++){
-                if(String(store.usuarios[i].nombre_usuario) == $cookieStore.get('usuario')){
-                    $cookieStore.put('idUsuario',store.usuarios[i].id);
+                if(String(store.usuarios[i].username) == $cookieStore.get('usuario')){
+                    $cookieStore.put('idUsuario',store.usuarios[i].idUsuario);
                 }
             }
         });
@@ -378,7 +384,7 @@
 		var store = this;
 		store.camaras = [];
 		
-		$http.get('JSON/camaras.json').success(function(data){
+		$http.get('http://localhost:3000/Camaras').success(function(data){
 			store.camaras = data;
 		});	
 	}]);

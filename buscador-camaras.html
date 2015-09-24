@@ -31,15 +31,13 @@
 					<th><font color="blue"><a href="#">Ranking</a><font></th>
 					<th><font color="blue"><a href="#">Marca</a><font></th>
 					<th><font color="blue"><a href="#">Modelo</a><font></th>
-					<th><font color="blue"><a href="#">Tipos de modelos</a><font></th>
 				</tr>
 			</thead>
 			<tbody>
 				<tr ng-repeat="camaras in controlador.camaras">
-					<td>{{ camaras.ranking }}</td>
-					<td><a href="#">{{ camaras.marca }}</a></td>
-					<td><a href="#">{{ camaras.modelo }}</a></td>
-					<td>{{ camaras.tipo }}</td>
+					<td>{{ camaras.idCamara + 1}}</td>
+					<td><a href="#">{{ camaras.marcaCamara }}</a></td>
+					<td><a href="#">{{ camaras.modeloCamara }}</a></td>
 				</tr>
 			</tbody>
 		</table>
