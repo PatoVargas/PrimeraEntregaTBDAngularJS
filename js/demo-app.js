@@ -283,10 +283,10 @@
         store.comentarios = [];
         store.comentariosFiltrados = [];
         
-        $http.get('http://localhost:3000/comments').success(function(data){
+        $http.get('http://localhost:3000/Comentarios').success(function(data){
             store.comentarios = data;
             for(i = 0; i < store.comentarios.length; i++){
-                if(String(store.comentarios[i].idFoto)==$cookieStore.get('idFoto')){
+                if(String(store.comentarios[i].imagenidimagen.idImagen)==$cookieStore.get('idFoto')){
                     store.comentariosFiltrados.push(store.comentarios[i]);
                     }
                 }

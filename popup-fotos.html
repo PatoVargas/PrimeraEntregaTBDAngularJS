@@ -11,8 +11,8 @@
                 </div>
                 <div class="col-xs-3" align="center" ng-controller="ComentariosCtrl as controlador">
                     <div class="alert alert-warning" role="alert" ng-repeat="comentarios in controlador.comentariosFiltrados">
-                    <p>"{{ comentarios.body }}"</p>
-                    <p><strong>{{ comentarios.idFoto }}</strong></p>
+                    <p>"{{ comentarios.textoComentario }}"</p>
+                    <p><strong>{{ comentarios.usuarioidusuario.username }}</strong></p>
                     </div>
                 </div>
             </div>
