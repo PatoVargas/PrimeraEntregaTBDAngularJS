@@ -1,29 +1,22 @@
 <div class="container-fluid">	
 	<div class="row">
-			<div class="col-xs-4">
-				<img src="img/foto1.jpeg" alt=":)" class="img-thumbnail">
+		<div ng-controller="AlbumCtrl as controlador">
+			<div class=" col-xs-4 alert alert-warning " role="alert" ng-repeat="album in controlador.albumesFiltrados">
+				<p><strong><h2>{{ album.nombreAlbum }}</h2></strong></p>
+				<p>"{{ album.descripcionAlbum }}"</p>
+				<h6><strong><p>{{ album.privacidadAlbum }}</p></h4></strong>
+				<p ALIGN=right>{{ album.fechaCreacionalbum }}</p>
+
 			</div>
-			<div class="col-xs-4">
-				<img src="img/foto3.jpg" alt=":D!" height="150" class="img-thumbnail">
-			</div>
+		</div>
 	</div>
-	<div class="row">
-			<div class="col-xs-4">
-				<font color="blue"><strong>Primer Album</strong></font>
-				<span class="glyphicon glyphicon-heart"><font color="blue">10012</font></span>
-				<span class="glyphicon glyphicon-comment"><font color="blue">322</font></span>
-			</div>
-			<div class="col-xs-4">
-				<font color="blue"><strong>Vacaciones</strong></font>
-				<span class="glyphicon glyphicon-heart"><font color="blue">43</font></span>
-				<span class="glyphicon glyphicon-comment"><font color="blue">91</font></span>
-			</div>
+	<p></p>
+	<div>
+		<button type="button" class="btn btn-primary">
+			<h4>
+				Crear Album
+			</h4>
+			<span class="glyphicon glyphicon-plus"></span>
+		</button>
 	</div>
-	<h1></h1>
-	<button type="button" class="btn btn-primary">
-		<h4>
-			Crear Album
-		</h4>
-		<span class="glyphicon glyphicon-plus"></span>
-	</button>
 </div>

@@ -267,6 +267,7 @@
             }
         });
     });
+
 //###################################REGISTRO#############################
 
     app.controller('RegistroCtrl', function($scope, registroService,$cookies, $cookieStore){    
@@ -472,6 +473,23 @@
         }
 
     }); 
+
+//###################################ALBUM###############################################
+
+    app.controller('AlbumCtrl',function($http,$cookieStore,$cookies) {
+        var store = this;
+        store.albumes = [];
+        store.albumesFiltrados = [];
+        
+        $http.get('http://localhost:3000/Albums').success(function(data){
+            store.albumes = data;
+            for(i = 0; i < store.albumes.length; i++){
+                if(String(store.albumes[i].usuarioidusuario.idUsuario) == $cookieStore.get('idUsuario')){
+                    store.albumesFiltrados.push(store.albumes[i]);
+                    }
+                }
+            });
+        });
 
 //######################################################################################
 	var app = angular.module('appServices', []);
