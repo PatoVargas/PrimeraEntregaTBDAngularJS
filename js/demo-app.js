@@ -415,12 +415,12 @@
         store.fotos = [];
         store.foto;
         
-        $http.get('http://localhost:3000/Fotos').success(function(data){
+        $http.get('http://localhost:3000/FOTOS2').success(function(data){
             store.fotos = data;
             for (i = 0; i < store.fotos.length; i++){
-                if(String(store.fotos[i].url) == $scope.URLFOTO){
-                    $cookieStore.put('idFoto',store.fotos[i].id);
-                    $cookieStore.put('idUsuarioFoto',store.fotos[i].idUsuario);
+                if(String(store.fotos[i].pathImagen) == $scope.URLFOTO){
+                    $cookieStore.put('idFoto',store.fotos[i].idImagen);
+                    $cookieStore.put('idUsuarioFoto',store.fotos[i].usuarioidusuario.idUsuario);
                     store.foto = store.fotos[i];
                 }
             }
@@ -431,7 +431,7 @@
         var store = this;
         store.fotos = [];
         
-        $http.get('http://localhost:3000/Fotos').success(function(data){
+        $http.get('http://localhost:3000/FOTOS2').success(function(data){
             store.fotos = data;
         }); 
     }]);
@@ -441,10 +441,10 @@
         store.fotos = [];
         store.fotosPropias = [];
         
-        $http.get('http://localhost:3000/Fotos').success(function(data){
+        $http.get('http://localhost:3000/FOTOS2').success(function(data){
             store.fotos = data;
             for( i = 0 ; i < store.fotos.length ; i++){
-                if(store.fotos[i].idUsuario == $cookieStore.get('idUsuario')){
+                if(String(store.fotos[i].usuarioidusuario.idUsuario) == $cookieStore.get('idUsuario')){
                     store.fotosPropias.push(store.fotos[i]);
                 }
             } 

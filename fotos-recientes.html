@@ -1,18 +1,15 @@
 <div class="container-fluid" ng-controller='ModalDemoCtrl'>	
 	<div class="row" ng-controller="FotosCtrl as controlador">
-		<div class="col-sm-6 col-md-4">
+		<div class="col-xs-4 col-xs-offset-4">
 			<div class="thumbnail" ng-repeat="fotos in controlador.fotos">
-				<img src="{{fotos.url}}" class="img-thumbnail" ng-model="fotos.url" id="fotoActual" ng-click="open('lg',fotos.url)">
+				<img src="{{fotos.pathImagen}}" class="img-thumbnail" ng-model="fotos.pathImagen" id="fotoActual" ng-click="open('lg',fotos.pathImagen)">
 				<div class="caption">
-				<p>
-					<font color="blue"><strong>{{fotos.titulo}}</strong></font>
-					<span class="glyphicon glyphicon-heart"><font color="blue">42</font></span>
-					<span class="glyphicon glyphicon-comment"><font color="blue">32</font></span>
-					<font color="blue">{{fotos.idUsuario}}</font>
-				</p>
+				<p><font color="blue"><strong>"{{fotos.descripcionImagen}}"</strong></font></p>
+				<p><font color="blue">Dueño: {{fotos.usuarioidusuario.username}}</font></p>
+				<p><font color="blue">Licencia: {{fotos.licenciaImagen}}</font></p>
+				<p align=right><font color="blue">{{fotos.fechaImagen}}</font></p>
 				</div>
 			</div>
 		</div>
 	</div>
-
 </div>
