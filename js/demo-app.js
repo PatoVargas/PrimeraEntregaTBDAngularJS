@@ -19,7 +19,7 @@
                 when('/mapa-mundial', {templateUrl: 'mapa-mundial.html',   controller: 'MapaCtrl'}).
                 when('/photostream', {templateUrl: 'photostream.html',   controller: 'HomeCtrl'}).
                 when('/subir-foto', {templateUrl: 'subir-foto.html',   controller: 'HomeCtrl'}).
-                when('/buscador',{templeUrl:'buscador.html', controller:'HomeCtrl'}).
+                when('/buscador',{templateUrl:'buscador.html', controller:'HomeCtrl'}).
                 // Otras rutas
                 when('/list', {templateUrl: 'list.html',   controller: 'ListCtrl'}).
                 when('/detail/:itemId', {templateUrl: 'detail.html',   controller: 'DetailCtrl'}).
@@ -473,6 +473,15 @@
         }
 
     }); 
+
+    app.controller('resultadosCtrl', [ '$http', function($http) {
+        var store = this;
+        store.fotos = [];
+        
+        $http.get('http://localhost:3000/FOTOS2').success(function(data){
+            store.fotos = data;
+        }); 
+    }]);
 
 //###################################ALBUM###############################################
 
