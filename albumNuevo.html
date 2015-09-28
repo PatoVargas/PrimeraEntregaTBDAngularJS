@@ -1,0 +1,39 @@
+    <div>
+        <div class="modal-header">
+            <h1>Album nuevo</h1>
+            <h3>Completa los siguientes datos</h3>
+        </div>
+        <div class="modal-body">
+			<div class="col-xs-3">
+				<form class="form-horizontal" role="form">
+				<div class="form-group">
+					<h5>Nombre del album:</h5>
+					<input type="text" class="form-control" required ng-model="album.nombreAlbum">
+				</div>
+				<div class="form-group">
+					<h5>Descripción:</h5>
+					<input type="text" class="form-control" required ng-model="album.descripcionAlbum">
+				</div>
+				<div>
+					<h5>Privacidad:</h5>
+					<select class="form-group" required ng-model="album.privacidadAlbum">
+						<option value = "privado">Privado</option>
+						<option value = "publico">Público</option>
+					</select>
+				</div>
+				</form>
+				<div ng-controller="crearAlbumCtrl">
+					<button type="button" class="btn btn-default"><a ng-click="crearAlbum(album)">Crear</a></button>
+					<button class="btn btn-warning" ng-click="cancel()">Cancelar</button>
+				</div>	
+			</div>
+		</div>
+		<div class="modal-footer">
+            <div class="row">
+        	</div>
+        </div>
+	</div>
+
+
+
+	

@@ -500,6 +500,42 @@
             });
         });
 
+        app.controller('ModalDemoCtrlAlbum', function($scope, $modal, $log, $cookies, $cookieStore) {
+        $scope.animationsEnabled = true;
+        $scope.open = function (size) {
+            var modalInstance = $modal.open({
+                animation: $scope.animationsEnabled,
+                templateUrl: 'albumNuevo.html',
+                controller: 'ModalInstanceCtrl',
+                size: size
+            });
+        };
+        $scope.toggleAnimation = function () {
+            $scope.animationsEnabled = !$scope.animationsEnabled;
+        };
+
+    });
+
+                app.controller('crearAlbumCtrl', function($scope, crearAlbumService,$cookieStore,$cookies){    
+        $scope.crearAlbum=function(album){
+            album.idUsuario = $cookieStore.get('idUsuario');
+            crearAlbumService.crearAlbum(album,$scope);
+            }
+        });    
+
+    app.factory('crearAlbumService',function($http){
+        return{
+            crearAlbum:function(album,scope){
+                $http.post('http://localhost:3000/albumsNuevos',album).success(function(data, status, headers, config) {
+                    alert("Album creado");
+                    }).error(function(data, status, headers, config) {
+                    alert("Ha fallado la petición");
+                });
+            }
+        }
+
+    });
+
 //######################################################################################
 	var app = angular.module('appServices', []);
 

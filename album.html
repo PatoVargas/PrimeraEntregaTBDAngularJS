@@ -1,18 +1,17 @@
-<div class="container-fluid">	
+<div class="container-fluid" ng-controller='ModalDemoCtrlAlbum'>	
 	<div class="row">
 		<div ng-controller="AlbumCtrl as controlador">
 			<div class=" col-xs-4 alert alert-warning " role="alert" ng-repeat="album in controlador.albumesFiltrados">
 				<p><strong><h2>{{ album.nombreAlbum }}</h2></strong></p>
 				<p>"{{ album.descripcionAlbum }}"</p>
-				<h6><strong><p>{{ album.privacidadAlbum }}</p></h4></strong>
+				<h6><strong><p>{{ album.privacidadAlbum }}</p></strong></h6>
 				<p ALIGN=right>{{ album.fechaCreacionalbum }}</p>
-
 			</div>
 		</div>
 	</div>
 	<p></p>
 	<div>
-		<button type="button" class="btn btn-primary">
+		<button type="button" class="btn btn-primary" ng-click="open('lg')">
 			<h4>
 				Crear Album
 			</h4>
