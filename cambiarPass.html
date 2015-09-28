@@ -1,0 +1,27 @@
+    <div>
+        <div class="modal-header">
+            <h1>Cambiar contraseña</h1>
+        </div>
+        <div class="modal-body">
+					<div>
+						<h5>Ingrese contraseña actual:</h5>
+						<input type="password" required ng-model="usuario.passUsuario">
+					</div>
+					<div>
+						<h5>Ingrese nueva contraseña:</h5>
+							<input type="password" required ng-model="usuario.passNuevaUsuario">
+					</div>
+					<div>
+						<h5>Repita la nueva contraseña:</h5>
+							<input type="password" required ng-model="usuario.passNuevaUsuarioConfirmacion">
+					</div>
+			<div ng-controller="cambiarPassCtrl">
+					<button type="button" class="btn btn-default" ng-disabled="usuario.passNuevaUsuario != usuario.passNuevaUsuarioConfirmacion"><a ng-click="cambiarPass(usuario)">Cambiar</a></button>
+					<button class="btn btn-warning" ng-click="cancel()">Cancelar</button>
+			</div>	        	
+		</div>
+		<div class="modal-footer">
+            <div class="row">
+        	</div>
+        </div>
+	</div>

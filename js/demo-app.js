@@ -323,6 +323,7 @@
             comentar:function(comentario,scope){
                 $http.post('http://localhost:3000/comments',comentario).success(function(data, status, headers, config) {
                     alert("Comentario guardado");
+                    location.reload();
                     }).error(function(data, status, headers, config) {
                     alert("Ha fallado la petición");
                 });
@@ -528,6 +529,7 @@
             crearAlbum:function(album,scope){
                 $http.post('http://localhost:3000/albumsNuevos',album).success(function(data, status, headers, config) {
                     alert("Album creado");
+                    location.reload();
                     }).error(function(data, status, headers, config) {
                     alert("Ha fallado la petición");
                 });
@@ -565,6 +567,44 @@
             editarPerfil:function(usuario,scope){
                 $http.post('http://localhost:3000/cambiarUsuario',usuario).success(function(data, status, headers, config) {
                     alert("editando usuario");
+                    location.reload();
+                    }).error(function(data, status, headers, config) {
+                    alert("Ha fallado la petición");
+                });
+            }
+        }
+
+    });
+
+        app.controller('ModalDemoCtrlCambiarPass', function($scope, $modal, $log, $cookies, $cookieStore) {
+        $scope.animationsEnabled = true;
+        $scope.openpass = function (size) {
+            var modalInstance = $modal.open({
+                animation: $scope.animationsEnabled,
+                templateUrl: 'cambiarPass.html',
+                controller: 'ModalInstanceCtrl',
+                size: size
+            });
+        };
+        $scope.toggleAnimation = function () {
+            $scope.animationsEnabled = !$scope.animationsEnabled;
+        };
+
+    });
+
+                app.controller('cambiarPassCtrl', function($scope, cambiarPassService,$cookieStore,$cookies){    
+        $scope.cambiarPass=function(usuario){
+            usuario.idUsuario = $cookieStore.get('idUsuario');
+            cambiarPassService.cambiarPass(usuario,$scope);
+            }
+        });    
+
+    app.factory('cambiarPassService',function($http){
+        return{
+            cambiarPass:function(usuario,scope){
+                $http.post('http://localhost:3000/cambiarPassUsuario',usuario).success(function(data, status, headers, config) {
+                    alert("editando usuario");
+                    window.location.href="vistausuario.html";
                     }).error(function(data, status, headers, config) {
                     alert("Ha fallado la petición");
                 });
