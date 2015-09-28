@@ -1,0 +1,67 @@
+    <div>
+        <div class="modal-header">
+            <h1>Editar Perfil</h1>
+        </div>
+        <div class="modal-body">
+					<div>
+						<h5>Ingrese correo:</h5>
+						<input type="text" required ng-model="usuario.emailUsuario">
+					</div>
+					<div>
+						<h5>Nombre de usuario:</h5>
+							<input type="text" required ng-model="usuario.username">
+					</div>
+					<div>
+						<h5>Nombre y apellido</h5>
+						<div class="row">
+							<div class="col-xs-4">
+								<input type="text" required placeholder="Nombre" ng-model="usuario.nombreUsuario">
+							</div>
+							<div class="col-xs-4">
+								<input type="text" required placeholder="Apellido" ng-model="usuario.apellidoUsuario">
+							</div>
+						</div>
+					</div>
+					<div>
+						<h5>Fecha de nacimiento:</h5>
+						<div class="row">
+							<div class="col-xs-2">
+								<input type="text" placeholder="Día" required ng-model="usuario.dia">
+							</div>
+							<div class="col-xs-2">
+								<input type="text" placeholder="Mes" required ng-model="usuario.mes">
+							</div>
+							<div class="col-xs-2">
+							<input type="text" placeholder="Año" required ng-model="usuario.year">
+							</div>
+						</div>
+					</div>
+					<div>
+						<h5>Telefono:</h5>
+						<input type="text" required ng-model="usuario.numeroMovilusuario">
+					</div>
+					<div>
+						<div class="row">
+							<div class="col-xs-4">
+								<h5>Género:</h5>
+								<select required ng-model="usuario.sexoUsuario">
+									<option value = "F">Femenino</option>
+									<option value = "M">Masculino</option>
+								</select>
+							</div>
+							<div class="col-xs-4">
+								<h5>País:</h5>
+								<input type="text" class="form-control" required ng-model="usuario.paisUsuario">
+							</div>
+						</div>
+					</div>
+			<div ng-controller="editarPerfilCtrl">
+					<button type="button" class="btn btn-default"><a ng-click="editarPerfil(usuario)">Editar</a></button>
+					<button class="btn btn-warning" ng-click="cancel()">Cancelar</button>
+			</div>	        	
+		</div>
+		<div class="modal-footer">
+            <div class="row">
+        	</div>
+        </div>
+	</div>

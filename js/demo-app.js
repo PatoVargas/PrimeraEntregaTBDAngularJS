@@ -535,6 +535,43 @@
         }
 
     });
+//#####################################PerfilUsuario####################################
+
+        app.controller('ModalDemoCtrlEditarPerfil', function($scope, $modal, $log, $cookies, $cookieStore) {
+        $scope.animationsEnabled = true;
+        $scope.open = function (size) {
+            var modalInstance = $modal.open({
+                animation: $scope.animationsEnabled,
+                templateUrl: 'editarPerfil.html',
+                controller: 'ModalInstanceCtrl',
+                size: size
+            });
+        };
+        $scope.toggleAnimation = function () {
+            $scope.animationsEnabled = !$scope.animationsEnabled;
+        };
+
+    });
+
+                app.controller('editarPerfilCtrl', function($scope, editarPerfilService,$cookieStore,$cookies){    
+        $scope.editarPerfil=function(usuario){
+            usuario.idUsuario = $cookieStore.get('idUsuario');
+            editarPerfilService.editarPerfil(usuario,$scope);
+            }
+        });    
+
+    app.factory('editarPerfilService',function($http){
+        return{
+            editarPerfil:function(usuario,scope){
+                $http.post('http://localhost:3000/cambiarUsuario',usuario).success(function(data, status, headers, config) {
+                    alert("editando usuario");
+                    }).error(function(data, status, headers, config) {
+                    alert("Ha fallado la petición");
+                });
+            }
+        }
+
+    });
 
 //######################################################################################
 	var app = angular.module('appServices', []);

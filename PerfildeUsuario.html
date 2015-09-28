@@ -1,4 +1,4 @@
-<div class = "container-fluid">
+<div class = "container-fluid" ng-controller='ModalDemoCtrlEditarPerfil'>
         <div class="row">
             <div class="modal-header col-xs-6" ng-controller="getUsuario as controladorusuario">
                 <p><h1><strong>Usuario: </strong> {{controladorusuario.usuario.username}}</h1></p>
@@ -14,6 +14,15 @@
                 <p></p>
                 <p></p>
                 <img align=center width="100" height="100" src="img/usuario.jpg" alt=":)" class="img-thumbnail">
+                <p></p>
+                <p></p>
+                <p></p>
+                <button type="button" class="btn btn-primary" ng-click="open('lg')">
+                <h4>Editar perfil</h4>
+                </button>
+                <button type="button" class="btn btn-primary">
+                <h4>Cambiar contraseña</h4>
+                </button>
             </div>
         </div>
 </div>
